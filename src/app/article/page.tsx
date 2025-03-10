@@ -2,29 +2,33 @@
 
 import { fetchArticles } from '@/api/article'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import React from 'react'
+import Link from 'next/link'
+import React, { useEffect } from 'react'
 
 const page = () => {
-
-  // Access the client
-  //const queryClient = useQueryClient()
-
   // Queries
-  const query = useQuery({ queryKey: ['todos'], queryFn: fetchArticles })
-  
+  const { isLoading, isError, data, error } = useQuery({ queryKey: ['articles'], queryFn: fetchArticles })
+
   return (
     <>
-      {!query.data && (
-        <div>wait</div>
-      )}
-      {query.data && (
-        <>
-        <ul>{query.data?.map((article) => <li key = {`${article.id}`}>{article.title}</li>)}</ul>
-        <div>page</div>
-        </>
-      )}
-    </>
-  )
+    {isLoading && (
+      <div>wait</div>
+    )}
+    {isError && (
+      <div>{error as any} </div>
+    )}
+    {data && (
+      <>
+        <ul>{
+          data?.map((article) => (
+            <li key = {`${article.id}`}>
+              <Link href={`/article/${article.id}`}>{article.title}</Link>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+   </>)
 }
 
 export default page

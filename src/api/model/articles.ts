@@ -1,14 +1,14 @@
 export class Article {
   id: Number;
-  title: String;
-  subtitle: String;
-  image: String;
-  url: String;
-  name: String;
-  time: String;
-  readtime: String;
+  title: string;
+  subtitle: string;
+  image: string;
+  url: string;
+  name: string;
+  time: string;
+  readtime: string;
   category: Number;
-  description: String;
-  shareCount: String
-  checkCount: String
+  description: string;
+  shareCount: string
+  checkCount: string
 }
