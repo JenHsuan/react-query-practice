@@ -9,7 +9,6 @@ import {
 } from '@tanstack/react-query'
 
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import { Provider } from "./provider";
 
 
@@ -36,7 +35,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log(children)
   return (
     <html lang="en">
       <body
