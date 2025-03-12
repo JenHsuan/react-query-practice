@@ -19,6 +19,7 @@ export const Provider = ({
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
+        suspense: true,
         refetchOnWindowFocus: true
       },
     },

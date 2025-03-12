@@ -1,49 +1,30 @@
 'use client'
 
-import { fetchArticles } from '@/api/article'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
-import Link from 'next/link'
-import React, { useEffect } from 'react'
+import { QueryErrorResetBoundary, useQuery, useQueryClient } from '@tanstack/react-query'
+import React, { lazy, Suspense, useEffect } from 'react'
 
-import styles from './page.module.scss';
-import { getArticlesData } from '@/utils/staticData'
-import { Article } from '@/api/model/articles'
+import Loading from '../loading/Loading'
+import { ErrorBoundary } from 'react-error-boundary'
+import ErrorContainer from '../error/ErrorContainer'
+
+const ArticleList = lazy(() => import('./article/articleList/ArticleList'))
 
 const page = () => {
-  // staleTime: Affects refetching while the query is active.	
-  // cacheTime: Affects garbage collection when the query is inactive.
-  const { isLoading, isError, data, error } = useQuery({ 
-    queryKey: ['articles'], 
-    queryFn: fetchArticles,
-    staleTime: 0, // Data is fresh for 0 minutes
-    cacheTime: 10 * 60 * 1000, // Data stays in cache for 10 minutes after inactivity
-  })
-
   return (
     <>
-    {isLoading && (
-      <div className={ styles.loadingContainer }>wait...</div>
-    )}
-
-    {isError && (
-      <div>{error as any} </div>
-    )}
-    {data && (
-      <>
-        <ul>{
-          data?.map((article: Article) => (
-            <li key = {`${article.id}`}>
-              <Link href={`/article/${article.id}`}>{article.title}</Link>
-            </li>
-          ))}
-        </ul>
-      </>
-    )}
+    <QueryErrorResetBoundary>
+      {({ reset }) => (
+      <Suspense fallback={<Loading />}>
+        <ErrorBoundary
+        onReset={reset}
+        fallbackRender={({ error, resetErrorBoundary }) => {
+          return <ErrorContainer error={error} resetErrorBoundary={ resetErrorBoundary }/>
+        }}>
+        <ArticleList/>
+      </ErrorBoundary>
+      </Suspense>)}
+    </QueryErrorResetBoundary>
    </>)
 }
-
-// export async function getStaticProps(){
-//   return await getArticlesData();
-// }
 
 export default page
