@@ -3,9 +3,9 @@
 import { QueryErrorResetBoundary, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { lazy, Suspense, useEffect } from 'react'
 
-import Loading from '../loading/Loading'
+import Loading from '../common/loading/Loading'
 import { ErrorBoundary } from 'react-error-boundary'
-import ErrorContainer from '../error/ErrorContainer'
+import ErrorContainer from '../common/error/ErrorContainer'
 
 const ArticleList = lazy(() => import('./article/articleList/ArticleList'))
 

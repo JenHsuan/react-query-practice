@@ -9,7 +9,7 @@ import {
 } from '@tanstack/react-query'
 
 import { Geist, Geist_Mono } from "next/font/google";
-import { Provider } from "./provider";
+import { Provider } from "./api/query-client/provider";
 
 
 // Create a client

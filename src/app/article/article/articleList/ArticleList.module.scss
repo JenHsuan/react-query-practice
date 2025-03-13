@@ -1,0 +1,11 @@
+.container {
+   margin: 0 auto;
+   width: max-content;
+  .buttonGroupContainer {
+    display: flex;
+      
+    button {
+      margin: 0 .5em;
+    }
+  }
+}

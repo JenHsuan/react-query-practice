@@ -2,16 +2,17 @@ import React from 'react'
 
 import Image from 'next/image'
 
-import styles from './ArticleDetail.module.scss';
 import { useQuery } from '@tanstack/react-query';
-import { articlesKeys } from '@/api/query-key/query-key';
-import { fetchArticleById } from '@/api/article';
+import { articlesKeys } from '@/app/api/query-key/query-key';
+import { fetchArticleById } from '@/app/api/article/article';
+
+import styles from './ArticleDetail.module.scss';
 
 const ArticleDetail = ({ id }: { id: Number}) => {
   // useQuery dependent Query & Lazy Queries
   const { isInitialLoading, isLoading, isError, data, error } = useQuery({ 
     queryKey: articlesKeys.detail(id), 
-    queryFn: async () => fetchArticleById(id),
+    queryFn: async () => await  fetchArticleById(id),
 
     // The query will not execute until the id exists
     enabled: !!id,

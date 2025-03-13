@@ -2,13 +2,10 @@
 
 import React from 'react'
 import {
-    useQuery,
-    useMutation,
-    useQueryClient,
-    QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { getQueryClient } from './query-client';
 
 export const Provider = ({
     children,
@@ -16,14 +13,7 @@ export const Provider = ({
     children: React.ReactNode;
   }>) => {
   // Create a client
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        suspense: true,
-        refetchOnWindowFocus: true
-      },
-    },
-  });
+  const queryClient = getQueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>

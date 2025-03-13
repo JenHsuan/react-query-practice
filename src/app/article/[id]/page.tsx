@@ -5,9 +5,9 @@ import React, { lazy, Suspense, useEffect, useState } from 'react'
 
 import * as _ from 'lodash';
 
-import Loading from '@/app/loading/Loading';
+import Loading from '@/app/common/loading/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
-import ErrorContainer from '@/app/error/ErrorContainer';
+import ErrorContainer from '@/app/common/error/ErrorContainer';
 
 const ArticleDetail = lazy(() => import('../article/articleDetail/ArticleDetail'));
 

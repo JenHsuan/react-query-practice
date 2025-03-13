@@ -1,4 +1,4 @@
-import { Article } from "@/api/model/articles";
+import { Article } from "@/app/api/model/articles";
 import axios, { AxiosResponse } from "axios";
 
 export async function getArticlesData() {
